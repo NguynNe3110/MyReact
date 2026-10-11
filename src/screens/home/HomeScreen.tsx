@@ -1,119 +1,144 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React, { useState } from 'react'
+import React from 'react';
+import {
+  ActivityIndicator,
+  FlatList,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import { useHomeViewModel } from './useHomeViewModel';
+import { Snackbar } from '../../components/Snackbar';
+import { Product } from '../../domain/product';
 
-const HomeScreen = () => {
-  const [count, setCount] = useState(0);
+export const HomeScreen: React.FC = () => {
+  // Lấy UI State và Actions từ ViewModel
+  const { state, onProductPress, dismissSnackbar } = useHomeViewModel();
+  const { products, isLoading, snackbarMessage } = state;
 
+  const renderProductItem = ({ item }: { item: Product }) => (
+    <TouchableOpacity
+      style={styles.card}
+      activeOpacity={0.7}
+      onPress={() => onProductPress(item)}
+    >
+      <View style={styles.cardHeader}>
+        <Text style={styles.productName}>{item.name}</Text>
+        <Text style={styles.productPrice}>
+          {item.price.toLocaleString('vi-VN')} đ
+        </Text>
+      </View>
+      <Text style={styles.productDescription} numberOfLines={2}>
+        {item.description}
+      </Text>
+      <Text style={styles.viewDetailHint}>Chạm để xem chi tiết →</Text>
+    </TouchableOpacity>
+  );
 
   return (
-    <View style= {styles.screenContainer}>
-      <View style = {styles.header}>
-        <Text style = {styles.title}> Màn hình HomeScreen</Text>
-        <Text style = {styles.subtitle}>File: src/screens/homescreen.tsx</Text> 
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.title}>Danh Sách Sản Phẩm</Text>
+        <Text style={styles.subtitle}>Clean Architecture & MVVM Pattern</Text>
       </View>
-        
-      <View style = {styles.card}>
-        <Text style = {styles.cardLabel}> Số lần bạn đã chạm: </Text>
-        <Text style = {styles.counterText}>{count}</Text> 
-      
 
-      <TouchableOpacity 
-        style = {styles.button}
-        activeOpacity={0.7}
-        onPress = {() => setCount(count + 1)}>
-        <Text style={styles.buttonText}>Bấm để + 1</Text>
-      </TouchableOpacity>
-
-      {count > 0 && (
-        <TouchableOpacity
-          style= {styles.resetButton}
-          onPress = {() => setCount(0)}>
-            <Text style= {styles.resetButtonText}>đặt lại</Text>
-        </TouchableOpacity>
+      {isLoading ? (
+        <View style={styles.loadingContainer}>
+          <ActivityIndicator size="large" color="#2563eb" />
+          <Text style={styles.loadingText}>Đang tải dữ liệu từ Service...</Text>
+        </View>
+      ) : (
+        <FlatList
+          data={products}
+          keyExtractor={(item) => item.id}
+          renderItem={renderProductItem}
+          contentContainerStyle={styles.listContent}
+          showsVerticalScrollIndicator={false}
+        />
       )}
 
-
-      </View>
-
+      {/* Snackbar hiển thị Event khi chuyển màn hình */}
+      <Snackbar message={snackbarMessage} onDismiss={dismissSnackbar} />
     </View>
   );
-}
+};
 
-export default HomeScreen
+export default HomeScreen;
 
 const styles = StyleSheet.create({
-  screenContainer: {
-    flex: 1, // chiem toan bo man hinh
-    width: '100%',
-    paddingHorizontal: 20, 
-    justifyContent: 'center', // can giua theo chieu doc
-    alignItems: 'center', // can giua theo chieu ngang
-    backgroundColor: 'white',  // mau nen
-  
-  }, 
+  container: {
+    flex: 1,
+    backgroundColor: '#f8fafc',
+    paddingHorizontal: 20,
+    paddingTop: 16,
+  },
   header: {
-    alignItems: 'center', // can giua theo chieu ngang
-    marginBottom: 28, 
-  }, 
+    marginBottom: 20,
+  },
   title: {
-    fontSize: 24, 
-    fontWeight: '700', 
-    color: '#0f172a', 
-    marginBottom: 6,
-  }, 
-  subtitle: {
-    fontSize: 14, 
-    color: '#64748b',
-  } , 
-  // Thẻ Card màu trắng
-  card: {
-    width: '100%',
-    maxWidth: 360,
-    backgroundColor: '#ffffff',
-    borderRadius: 20,
-    padding: 24,
-    alignItems: 'center',
-    // Đổ bóng trên iOS
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.08,
-    shadowRadius: 12,
-    // Đổ bóng trên Android
-    elevation: 3,
-  },
-  cardLabel: {
-    fontSize: 15,
-    color: '#475569',
-    fontWeight: '500',
-  },
-  counterText: {
-    fontSize: 48,
+    fontSize: 26,
     fontWeight: '800',
-    color: '#2563eb',          // Màu xanh dương chủ đạo
-    marginVertical: 12,
+    color: '#0f172a',
+    letterSpacing: -0.5,
   },
-  // Nút bấm chính
-  button: {
-    backgroundColor: '#2563eb',
-    width: '100%',
-    paddingVertical: 14,
-    borderRadius: 12,
+  subtitle: {
+    fontSize: 14,
+    color: '#64748b',
+    marginTop: 4,
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 8,
   },
-  buttonText: {
-    color: '#ffffff',
+  loadingText: {
+    marginTop: 12,
+    color: '#64748b',
+    fontSize: 15,
+  },
+  listContent: {
+    paddingBottom: 40,
+  },
+  card: {
+    backgroundColor: '#ffffff',
+    borderRadius: 16,
+    padding: 18,
+    marginBottom: 14,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.06,
+    shadowRadius: 8,
+    elevation: 2,
+    borderWidth: 1,
+    borderColor: '#f1f5f9',
+  },
+  cardHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    marginBottom: 8,
+  },
+  productName: {
+    fontSize: 17,
+    fontWeight: '700',
+    color: '#1e293b',
+    flex: 1,
+    marginRight: 8,
+  },
+  productPrice: {
     fontSize: 16,
+    fontWeight: '700',
+    color: '#2563eb',
+  },
+  productDescription: {
+    fontSize: 14,
+    color: '#64748b',
+    lineHeight: 20,
+    marginBottom: 10,
+  },
+  viewDetailHint: {
+    fontSize: 13,
+    color: '#3b82f6',
     fontWeight: '600',
   },
-  // Nút phụ Đặt lại
-  resetButton: {
-    marginTop: 12,
-    paddingVertical: 6,
-  },
-  resetButtonText: {
-    color: '#ef4444',          // Màu đỏ
-    fontSize: 14,
-    fontWeight: '500',
-  },
-})
+});
