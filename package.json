@@ -4,9 +4,12 @@
   "private": true,
   "scripts": {
     "android": "react-native run-android",
+    "android:release": "react-native run-android --mode=release",
     "ios": "react-native run-ios",
     "lint": "eslint .",
     "start": "react-native start",
+    "mirror": "start scrcpy",
+    "devand": "start scrcpy && react-native run-android",
     "test": "jest"
   },
   "dependencies": {
