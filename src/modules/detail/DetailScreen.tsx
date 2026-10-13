@@ -10,21 +10,23 @@ import { useDetailViewModel } from './useDetailViewModel';
 
 export const DetailScreen: React.FC = () => {
   const { state, goBack } = useDetailViewModel();
-  const { product, isLoading } = state;
+  const { user, isLoading, error } = state;
 
   if (isLoading) {
     return (
       <View style={styles.centerContainer}>
         <ActivityIndicator size="large" color="#2563eb" />
-        <Text style={styles.loadingText}>Đang tải thông tin sản phẩm...</Text>
+        <Text style={styles.loadingText}>Đang tải thông tin người dùng...</Text>
       </View>
     );
   }
 
-  if (!product) {
+  if (!user) {
     return (
       <View style={styles.centerContainer}>
-        <Text style={styles.notFoundText}>Không tìm thấy sản phẩm!</Text>
+        <Text style={styles.notFoundText}>
+          {error?.message ?? 'Không tìm thấy người dùng!'}
+        </Text>
         <TouchableOpacity style={styles.backButton} onPress={goBack}>
           <Text style={styles.backButtonText}>Quay lại</Text>
         </TouchableOpacity>
@@ -35,14 +37,14 @@ export const DetailScreen: React.FC = () => {
   return (
     <View style={styles.container}>
       <View style={styles.card}>
-        <Text style={styles.badge}>Chi tiết sản phẩm</Text>
-        <Text style={styles.name}>{product.name}</Text>
-        <Text style={styles.price}>
-          {product.price.toLocaleString('vi-VN')} đ
-        </Text>
+        <Text style={styles.badge}>Chi tiết người dùng</Text>
+        <Text style={styles.name}>{user.name}</Text>
+        <Text style={styles.email}>{user.email}</Text>
         <View style={styles.divider} />
-        <Text style={styles.sectionTitle}>Mô tả chi tiết:</Text>
-        <Text style={styles.description}>{product.description}</Text>
+        <Text style={styles.sectionTitle}>Thông tin liên hệ:</Text>
+        <Text style={styles.description}>Điện thoại: {user.phone}</Text>
+        <Text style={styles.description}>Thành phố: {user.address.city}</Text>
+        <Text style={styles.description}>Công ty: {user.company.name}</Text>
       </View>
 
       <TouchableOpacity style={styles.backButton} onPress={goBack}>
@@ -105,7 +107,7 @@ const styles = StyleSheet.create({
     color: '#0f172a',
     marginBottom: 8,
   },
-  price: {
+  email: {
     fontSize: 22,
     fontWeight: '700',
     color: '#2563eb',

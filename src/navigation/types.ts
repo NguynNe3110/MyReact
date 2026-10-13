@@ -3,7 +3,7 @@ import type { RouteProp } from '@react-navigation/native';
 
 export type RootStackParamList = {
   Home: undefined;
-  Detail: { productId: string };
+  Detail: { userId: number };
 };
 
 export type HomeScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Home'>;

@@ -1,0 +1,44 @@
+async sẽ bi đứng vv nếu k được xử lý bằng try catch
+
+khi mà gọi 2 hoặc nhiều api không phụ thuộc dữ liệu vào nhau (riêng rẽ), nếu gọi riêng thì gây chậm vì chúng phải chờ nhau
+cách đúng là bọc vào trong Promise.all() 
+const [user, products] = await Promise.all([
+  fetchUserProfile(),
+  fetchProducts()
+]);
+
+các phần tử được khai báo trong mảng phân rã của RN, tuy nhiên nó sẽ bị hủy nếu 1 trong số nó bị lỗi
+để lấy ra trạng thái của từng api thì dùng Promise.allSelected (kể cả có lỗi)
+
+----
+lưu ý chỉ setState  khi màn hình đang mở (ở trạng thái isMounted) nếu k sẽ bị lỗi
+
+====
+useEffect sinh ra để xử lý vòng đời của component (mounting, updating, unmounting)
+
+sync-tax
+
+useEffect(() => {
+    // Setup effect
+
+    return () => {
+        // Cleanup effect
+    };
+}, [dependency]);
+
+có 3 cách sử dụng dependency 
+useEffect(fn)   -> sau mỗi lần render được commit
+useEffect(fn, []) -> lúc mount và clean lúc unmount
+useEffect(fn, [value]) -> lúc mount và khi value thay đổi
+----
+interceptors.response.use() nhận hai hàm callback:
+
+onFullFiled : HTTP response thành công (mặc định status 2xx)
+onRejected : HTTP response bị lỗi hoặc request thất bại
+
+
+apiClient.interceptors.response.use(
+  hàmXửLýThànhCông,
+  hàmXửLýLỗi,
+);
+
