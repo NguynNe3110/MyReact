@@ -2,6 +2,7 @@
   "name": "MyReact",
   "version": "0.0.1",
   "private": true,
+  "packageManager": "yarn@1.22.22",
   "scripts": {
     "android": "react-native run-android",
     "android:release": "react-native run-android --mode=release",
@@ -23,7 +24,8 @@
     "react-native-config": "^1.7.2",
     "react-native-keychain": "^10.0.0",
     "react-native-safe-area-context": "^5.5.2",
-    "react-native-screens": "^4.29.0"
+    "react-native-screens": "^4.29.0",
+    "react-native-svg": "^15.15.5"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
