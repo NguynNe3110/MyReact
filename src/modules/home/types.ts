@@ -28,3 +28,9 @@ export type User = {
     company: UserCompany;
     address: UserAddress;
 }
+
+export type Profile = {
+    name: string, 
+    email: string, 
+    phone: string, 
+}

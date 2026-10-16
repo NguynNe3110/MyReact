@@ -5,19 +5,40 @@ import { AppColors } from '../../../theme/colors';
 
 type UserItemProps = {
   user: User;
+  onPress: (user: User) => void;
   onDelete: (user: User) => void;
 };
 
-function UserItem({ user, onDelete }: UserItemProps) {
+function UserItem({ user, onPress, onDelete }: UserItemProps) {
   return (
     <View style={styles.card}>
-      <View style={styles.infoContainer}>
+
+      <Pressable
+        accessibilityRole="button"
+        accessibilityLabel={`Xem chi tiết ${user.name}`}
+        onPress={() => onPress(user)}
+        style={({ pressed }) => [
+          styles.infoContainer,
+          pressed && styles.pressed,
+        ]}
+      >
+
         <Text style={styles.name}>{user.name}</Text>
         <Text style={styles.info}> {user.email} </Text>
-      </View>
-      <Pressable style={styles.deleteButton} onPress={() => onDelete(user)}>
+      </Pressable>
+
+
+      <Pressable 
+        onPress={() => onDelete(user)}
+        style = {({pressed}) => [
+          styles.deleteButton, 
+          pressed && styles.pressed
+        ]}
+      >
+
         <Text style={styles.deleteText}>Xóa</Text>
       </Pressable>
+
     </View>
   );
 }
@@ -41,7 +62,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-
+  pressed: {
+    opacity: 0.75,
+  },
   name: {
     fontSize: 18,
     fontWeight: '600',
@@ -54,8 +77,9 @@ const styles = StyleSheet.create({
 
   infoContainer: {
     flex: 1,
+    minHeight: 48,
+    justifyContent: 'center',
     gap: 8,
-    flexDirection: 'column',
   },
   deleteButton: {
     paddingHorizontal: 16,

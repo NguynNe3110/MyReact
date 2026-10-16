@@ -6,6 +6,7 @@ import {
 } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RouteName } from '../config/navigation';
+import type { Profile } from '../modules/home/types';
 
 // type mô tả danh sách màn hình và tham số của nó
 export type BottomTabParamList = {
@@ -39,7 +40,11 @@ export type RootStackParamList = {
   //   navigation.navigate('Detail',{
   //     userId: 1,
   //   })
-  [RouteName.Practice]: undefined
+
+  [RouteName.InfoSelf]: { profile: Profile };
+
+  [RouteName.UserScreen] : undefined;
+
 };
 
 // home có thể chuyển tab và mở màn trong stack cha
@@ -55,6 +60,11 @@ export type PraticeScreenNavigationProp = CompositeNavigationProp<
   NativeStackNavigationProp<RootStackParamList>
 >;
 
+export type SettingScreenNavigationProp = CompositeNavigationProp<
+  BottomTabNavigationProp<BottomTabParamList, RouteName.Setting>,
+  NativeStackNavigationProp<RootStackParamList>
+>;
+
 // định kiểu cho đối tượng navigation của Detail (giúp định danh màn hình Detail cho các màn hình khác navigate)
 export type DetailScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -66,4 +76,14 @@ export type DetailScreenNavigationProp = NativeStackNavigationProp<
 export type DetailScreenRouteProp = RouteProp<
   RootStackParamList,
   RouteName.Detail
+>;
+
+export type InfoSelfScreenRouteProp = RouteProp<
+  RootStackParamList,
+  RouteName.InfoSelf
+>;
+
+export type UserScreenNavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  RouteName.UserScreen
 >;

@@ -4,4 +4,6 @@ export enum RouteName {
   Practice = 'Practice',
   Setting = 'Setting',
   Detail = 'Detail',
+  InfoSelf = 'InfoSelf',
+  UserScreen = 'UserScreen'
 }

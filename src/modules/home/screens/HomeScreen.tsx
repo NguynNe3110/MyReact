@@ -1,4 +1,4 @@
-import { ActivityIndicator, Alert, FlatList, Pressable, StyleSheet, Text, View } from 'react-native'
+import { ActivityIndicator, FlatList, Pressable, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { useUsers } from '../hooks/useUsers';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -7,23 +7,12 @@ import { User } from '../types';
 import UserItem from '../components/UserItem';
 
 function HomeScreen() {
-  const {users, loading, error, reload, removeUser } = useUsers();
-
-  function handleDeleteUser(user: User) {
-    Alert.alert('Xóa người dùng', `Bạn có muốn xóa ${user.name}?`, [
-      { text: 'Hủy', style: 'cancel' },
-      {
-        text: 'Xóa',
-        style: 'destructive',
-        onPress: () => removeUser(user.id),
-      },
-    ]);
-  }
+  const {users, loading, error, reload } = useUsers();
 
   return (
     <SafeAreaView 
         style = {styles.container}
-        edges={['left', 'right']}
+        edges={['left', 'right', 'bottom']}
     >
         
         {error && !loading && ( // re
@@ -58,9 +47,7 @@ function HomeScreen() {
             <FlatList<User>
                 data={users}
                 keyExtractor={item => String(item.id)}
-                renderItem = {({item}) => (
-                    <UserItem user={item} onDelete={handleDeleteUser} />
-                )}
+                renderItem = {({item}) => <UserItem user = {item}/> }
                 contentContainerStyle = {styles.list}
                 refreshing = {loading}
                 onRefresh={reload}
