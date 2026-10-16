@@ -3,7 +3,7 @@ import ReactTestRenderer, { act } from 'react-test-renderer';
 import { TextInput } from 'react-native';
 import ItemList from '../src/components/ItemList';
 import { RouteName } from '../src/config/navigation';
-import type { Profile } from '../src/modules/home/types';
+import type { Profile } from '../src/modules/user/types';
 import InfoSelfScreen from '../src/modules/infoself/screens/InfoSelfScreen';
 import SettingScreen from '../src/modules/setting/screens/SettingScreen';
 

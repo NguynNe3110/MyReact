@@ -6,7 +6,7 @@ import HomeScreen from '../modules/home/screens/HomeScreen';
 import SettingScreen from '../modules/setting/screens/SettingScreen';
 import { AppColors } from '../theme/colors';
 import { RouteName } from '../config/navigation';
-import PracticeScreen from '../modules/practices/screens/PracticeScreen';
+import CartScreen from '../modules/cart/screens/CartScreen';
 
 //hàm create sẽ trả về đói tượng gồm Navigator, Screen, Group
 const Tab = createBottomTabNavigator<BottomTabParamList>();
@@ -36,8 +36,8 @@ export default function BottomTabNavigator() { // bản chât là component
       />
 
       <Tab.Screen
-        name={RouteName.Practice} // tên route dùng trong navigate()
-        component={PracticeScreen}
+        name={RouteName.Cart} // tên route dùng trong navigate()
+        component={CartScreen}
         options={{
           title: 'Thực hành', // tiêu đề của màn hình (xuất hiện ở header)
           tabBarLabel: 'Thực hành', // chữ hiển thị trên thanh tab

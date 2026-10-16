@@ -1,7 +1,7 @@
 import { StyleSheet, View } from 'react-native';
 import React from 'react';
 import AppTextField from '../../../components/AppTextField';
-import type { Profile } from '../../home/types';
+import type { Profile } from '../../user/types';
 
 type Props = {
   value: Profile;

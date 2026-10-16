@@ -1,10 +1,10 @@
 import { ActivityIndicator, FlatList, Pressable, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import { useUsers } from '../hooks/useUsers';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { AppColors } from '../../../theme/colors';
-import { User } from '../types';
-import UserItem from '../components/UserItem';
+import { User } from '../../user/types';
+import UserItem from '../../user/UserItem';
+import { useUsers } from '../../user/useUsers';
 
 function HomeScreen() {
   const {users, loading, error, reload } = useUsers();
@@ -15,51 +15,10 @@ function HomeScreen() {
         edges={['left', 'right', 'bottom']}
     >
         
-        {error && !loading && ( // re
-            <View style = {styles.errorBox}>
-                <Text style = {styles.errorText} 
-                    accessibilityRole="alert" >
-                    {error.message}
-                </Text>
-
-                <Pressable
-                    onPress={reload}
-                    accessibilityRole="button"
-                    style = {({pressed}) => [
-                        styles.button, 
-                        pressed && styles.pressed, 
-                    ]}
-                >
-                    <Text style = {styles.buttonText}>Thử lại</Text>
-                </Pressable>
-            </View>
-
-        )}
-
-        {loading && users.length === 0 ? (
-            <View style= {styles.center}>
-                <ActivityIndicator size={'large'}
-                    color={AppColors.primary} />
-                <Text style = {styles.message}>Đang tải...</Text>
-            </View>
-
-        ) : (
-            <FlatList<User>
-                data={users}
-                keyExtractor={item => String(item.id)}
-                renderItem = {({item}) => <UserItem user = {item}/> }
-                contentContainerStyle = {styles.list}
-                refreshing = {loading}
-                onRefresh={reload}
-                ListEmptyComponent={
-                    error ? undefined : (
-                        <Text style = {styles.message}>
-                            Danh sách trống
-                        </Text>
-                    )
-                }
-            ></FlatList>
-        )}
+        <Text
+        >
+          HomeScreen
+        </Text>
     </SafeAreaView>
   );
 }

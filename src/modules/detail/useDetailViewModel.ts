@@ -3,7 +3,7 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import { mapApiError } from '../../api/AppError';
 import type { AppError } from '../../api/AppError';
 import { getUserById } from '../home/api/userApi';
-import type { User } from '../home/types';
+import type { User } from '../user/types';
 import type {
   DetailScreenNavigationProp,
   DetailScreenRouteProp,

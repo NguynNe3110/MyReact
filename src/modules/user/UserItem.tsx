@@ -1,7 +1,7 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import { User } from '../types';
-import { AppColors } from '../../../theme/colors';
+import { User } from './types';
+import { AppColors } from '../../theme/colors';
 
 type UserItemProps = {
   user: User;

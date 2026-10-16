@@ -1,14 +1,31 @@
-import { ActivityIndicator, FlatList, Pressable, StyleSheet, Text, View } from 'react-native'
+import { ActivityIndicator, Alert, FlatList, Pressable, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useUsers } from '../home/hooks/useUsers';
 import { AppColors } from '../../theme/colors';
-import UserItem from '../home/components/UserItem';
-import { User } from '../home/types';
+import UserItem from './UserItem';
+import { User } from './types';
+import { useNavigation } from '@react-navigation/native';
+import { UserScreenNavigationProp } from '../../navigation/types';
+import { RouteName } from '../../config/navigation';
+import { useUsers } from './useUsers';
 
 function UserScreen() {
-  const {users, loading, error, reload } = useUsers();
+  const {users, loading, error, reload, removeUser } = useUsers();
 
+  // có thể chuyển màn hình
+    const navigation = useNavigation<UserScreenNavigationProp>();
+
+    // handle remove user
+    const handleDeleteUser = (selectdUser: User) => {
+        Alert.alert(
+            'Xác nhận xóa',
+            `Bạn có chắc muốn xóa ${selectdUser.name}`,
+            [
+                {text: 'Hủy', style: 'cancel'},
+                {text: 'Xóa', style: 'destructive', onPress: () => removeUser(selectdUser.id)},
+            ]
+        )
+    }
   return (
     <SafeAreaView 
         style = {styles.container}
@@ -47,7 +64,18 @@ function UserScreen() {
             <FlatList<User>
                 data={users}
                 keyExtractor={item => String(item.id)}
-                renderItem = {({item}) => <UserItem user = {item}/> }
+                renderItem = {({item}) => (
+                    <UserItem 
+                        user = {item}
+                        onPress={(selectedUser) => {
+                            navigation.navigate(RouteName.Detail, {
+                                userId: selectedUser.id
+                            });
+                        }} 
+
+                        onDelete={handleDeleteUser}
+                    />
+                )}
                 contentContainerStyle = {styles.list}
                 refreshing = {loading}
                 onRefresh={reload}

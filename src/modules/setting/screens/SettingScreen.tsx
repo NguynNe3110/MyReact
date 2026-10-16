@@ -1,4 +1,4 @@
-import { Keyboard, ScrollView, StyleSheet, View } from 'react-native';
+import { Keyboard, ScrollView, StatusBar, StyleSheet, View } from 'react-native';
 import React, { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { AppColors } from '../../../theme/colors';
@@ -7,7 +7,7 @@ import { IcChevronRight, IcUser } from '../../../assets/icons';
 import FormTextInputSetting from '../components/FormTextInputSetting';
 import { useNavigation } from '@react-navigation/native';
 import type { SettingScreenNavigationProp } from '../../../navigation/types';
-import type { Profile } from '../../home/types';
+import type { Profile } from '../../user/types';
 import { RouteName } from '../../../config/navigation';
 
 const SettingScreen = () => {
@@ -28,11 +28,11 @@ const SettingScreen = () => {
 
   function onGetUserJsonHolder() {
     Keyboard.dismiss();
-    navigation.navigate();
+    navigation.navigate(RouteName.UserScreen);
   }
 
   return (
-    <SafeAreaView style={styles.container} edges={['left', 'right', 'bottom']}>
+    <SafeAreaView style={styles.container} edges={['top','left', 'right', 'bottom']}>
       <ScrollView
         contentContainerStyle={styles.content}
         keyboardShouldPersistTaps="handled"
@@ -83,7 +83,7 @@ const SettingScreen = () => {
                 accessible={false}
               />
             }
-            onPress={onInfoSelfPress}
+            onPress={onGetUserJsonHolder}
           />
 
         </View>

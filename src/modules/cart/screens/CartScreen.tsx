@@ -1,15 +1,15 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 
-const PracticeScreen = () => {
+const CartScreen = () => {
   return (
     <View>
-      <Text>PracticeScreen</Text>
+      <Text>CartScreen</Text>
     </View>
   );
 };
 
-export default PracticeScreen;
+export default CartScreen;
 
 const styles = StyleSheet.create({
 

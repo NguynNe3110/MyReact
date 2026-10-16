@@ -6,13 +6,13 @@ import {
 } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RouteName } from '../config/navigation';
-import type { Profile } from '../modules/home/types';
+import type { Profile } from '../modules/user/types';
 
 // type mô tả danh sách màn hình và tham số của nó
 export type BottomTabParamList = {
   // các route thuộc bottom tabs
   [RouteName.Home]: undefined; // underfined là k yêu cầu tham số
-  [RouteName.Practice]: undefined; //setting là tên màn hình
+  [RouteName.Cart]: undefined; //setting là tên màn hình
   [RouteName.Setting]: undefined;
   // khi dùng thì navigation.navigate('Home');
 };
@@ -55,8 +55,8 @@ export type HomeScreenNavigationProp = CompositeNavigationProp<
 >;
 
 // prac cũng có thể chuyển tab và mở detail vì cùng cấp trong rootStackParamList
-export type PraticeScreenNavigationProp = CompositeNavigationProp<
-  BottomTabNavigationProp<BottomTabParamList, RouteName.Practice>,
+export type CartScreenNavigationProp = CompositeNavigationProp<
+  BottomTabNavigationProp<BottomTabParamList, RouteName.Cart>,
   NativeStackNavigationProp<RootStackParamList>
 >;
 
