@@ -2,12 +2,9 @@ import { useCallback, useEffect, useState } from 'react';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { mapApiError } from '../../api/AppError';
 import type { AppError } from '../../api/AppError';
-import { getUserById } from '../home/api/userApi';
 import type { User } from '../user/types';
-import type {
-  DetailScreenNavigationProp,
-  DetailScreenRouteProp,
-} from '../../navigation/types';
+import type { DetailUserScreenNavigationProp, DetailUserScreenRouteProp } from '../../navigation/types';
+import { getUserById } from '../user/api/userApi';
 
 export interface DetailUiState {
   readonly user: User | null;
@@ -15,9 +12,9 @@ export interface DetailUiState {
   readonly error: AppError | null;
 }
 
-export const useDetailViewModel = () => {
-  const route = useRoute<DetailScreenRouteProp>();
-  const navigation = useNavigation<DetailScreenNavigationProp>();
+export const useDetailUser = () => {
+  const route = useRoute<DetailUserScreenRouteProp>();
+  const navigation = useNavigation<DetailUserScreenNavigationProp>();
   const { userId } = route.params;
 
   const [state, setState] = useState<DetailUiState>({

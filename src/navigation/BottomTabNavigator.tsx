@@ -39,8 +39,8 @@ export default function BottomTabNavigator() { // bản chât là component
         name={RouteName.Cart} // tên route dùng trong navigate()
         component={CartScreen}
         options={{
-          title: 'Thực hành', // tiêu đề của màn hình (xuất hiện ở header)
-          tabBarLabel: 'Thực hành', // chữ hiển thị trên thanh tab
+          title: 'Giỏ hàng', // tiêu đề của màn hình (xuất hiện ở header)
+          tabBarLabel: 'Giỏ hàng', // chữ hiển thị trên thanh tab
         }}
       />
 

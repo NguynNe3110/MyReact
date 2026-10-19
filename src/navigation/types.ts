@@ -2,11 +2,13 @@ import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import {
   CompositeNavigationProp,
   NavigatorScreenParams,
+  Route,
   RouteProp,
 } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RouteName } from '../config/navigation';
 import type { Profile } from '../modules/user/types';
+import { AuthStackParamList } from './AuthNavigator';
 
 // type mô tả danh sách màn hình và tham số của nó
 export type BottomTabParamList = {
@@ -36,7 +38,11 @@ export type RootStackParamList = {
   //  screen: 'Settting'
   //})
 
-  [RouteName.Detail]: { userId: number }; // yêu cầu tryền tham số, khi gọi đến nó,
+  [RouteName.Auth] : 
+    | NavigatorScreenParams<AuthStackParamList>
+    | undefined;
+
+  [RouteName.DetailUser]: { userId: number }; // yêu cầu tryền tham số, khi gọi đến nó,
   //   navigation.navigate('Detail',{
   //     userId: 1,
   //   })
@@ -45,6 +51,11 @@ export type RootStackParamList = {
 
   [RouteName.UserScreen] : undefined;
 
+  [RouteName.DetailProduct] : {productId: number};
+
+  // [RouteName.Login] : undefined;
+  // [RouteName.Register] : undefined;
+  // [RouteName.ForgotPassword] : undefined;
 };
 
 // home có thể chuyển tab và mở màn trong stack cha
@@ -66,16 +77,16 @@ export type SettingScreenNavigationProp = CompositeNavigationProp<
 >;
 
 // định kiểu cho đối tượng navigation của Detail (giúp định danh màn hình Detail cho các màn hình khác navigate)
-export type DetailScreenNavigationProp = NativeStackNavigationProp<
+export type DetailUserScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
-  RouteName.Detail
+  RouteName.DetailUser
 >;
 
 // dùng để định kiểu cho đối tượng route của Detail. (định nghĩa các tham số truyền vào)
 // khi có screen gọi đến detail nó truyền param và Detail nhận lại bằng useRoute()
-export type DetailScreenRouteProp = RouteProp<
+export type DetailUserScreenRouteProp = RouteProp<
   RootStackParamList,
-  RouteName.Detail
+  RouteName.DetailUser
 >;
 
 export type InfoSelfScreenRouteProp = RouteProp<
@@ -86,4 +97,24 @@ export type InfoSelfScreenRouteProp = RouteProp<
 export type UserScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
   RouteName.UserScreen
+>;
+
+export type DetailProductScreenNavigationProp = NativeStackNavigationProp<
+  RootStackParamList, 
+  RouteName.DetailProduct
+>;
+
+export type DetailProductScreenProp = RouteProp<
+  RootStackParamList,
+  RouteName.DetailProduct
+>;
+
+export type LoginScreenNavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  RouteName.Login
+>;
+
+export type RegisterScreenNavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  RouteName.Register
 >;

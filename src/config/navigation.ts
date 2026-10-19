@@ -3,7 +3,14 @@ export enum RouteName {
   Home = 'Home',
   Cart = 'Cart',
   Setting = 'Setting',
-  Detail = 'Detail',
+  DetailUser = 'DetailUser',
   InfoSelf = 'InfoSelf',
-  UserScreen = 'UserScreen'
+  UserScreen = 'UserScreen',
+  DetailProduct = 'DetailProduct',
+
+  // auth
+  Login = 'Login',
+  Register = 'Register',
+  ForgotPassword = 'ForgotPassword',
+  Auth = 'Auth',
 }

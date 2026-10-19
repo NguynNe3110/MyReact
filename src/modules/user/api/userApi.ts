@@ -1,5 +1,5 @@
-import { apiClient } from "../../api/client";
-import { User } from "./types";
+import { apiClient } from "../../../api/client";
+import { User } from "../types";
 
 
 export async function getUsers() : Promise<User[]> {

@@ -1,13 +1,13 @@
 import { ActivityIndicator, Alert, FlatList, Pressable, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { AppColors } from '../../theme/colors';
-import UserItem from './UserItem';
-import { User } from './types';
+import { AppColors } from '../../../theme/colors';
 import { useNavigation } from '@react-navigation/native';
-import { UserScreenNavigationProp } from '../../navigation/types';
-import { RouteName } from '../../config/navigation';
-import { useUsers } from './useUsers';
+import { useUsers } from '../useUsers';
+import { UserScreenNavigationProp } from '../../../navigation/types';
+import { User } from '../types';
+import UserItem from '../component/UserItem';
+import { RouteName } from '../../../config/navigation';
 
 function UserScreen() {
   const {users, loading, error, reload, removeUser } = useUsers();
@@ -68,7 +68,7 @@ function UserScreen() {
                     <UserItem 
                         user = {item}
                         onPress={(selectedUser) => {
-                            navigation.navigate(RouteName.Detail, {
+                            navigation.navigate(RouteName.DetailUser, {
                                 userId: selectedUser.id
                             });
                         }} 

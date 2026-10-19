@@ -6,10 +6,10 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { useDetailViewModel } from './useDetailViewModel';
+import { useDetailUser } from './useDetailUser';
 
-export const DetailScreen: React.FC = () => {
-  const { state, goBack } = useDetailViewModel();
+export const DetailUserScreen: React.FC = () => {
+  const { state, goBack } = useDetailUser();
   const { user, isLoading, error } = state;
 
   if (isLoading) {
@@ -54,7 +54,7 @@ export const DetailScreen: React.FC = () => {
   );
 };
 
-export default DetailScreen;
+export default DetailUserScreen;
 
 const styles = StyleSheet.create({
   container: {

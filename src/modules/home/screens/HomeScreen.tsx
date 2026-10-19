@@ -1,24 +1,65 @@
 import { ActivityIndicator, FlatList, Pressable, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { AppColors } from '../../../theme/colors';
 import { User } from '../../user/types';
-import UserItem from '../../user/UserItem';
+import UserItem from '../../user/component/UserItem';
 import { useUsers } from '../../user/useUsers';
+import { useProducts } from '../hooks/useProducts';
+import { useNavigation } from '@react-navigation/native';
+import { HomeScreenNavigationProp } from '../../../navigation/types';
+import { Product } from '../types';
+import { RouteName } from '../../../config/navigation';
+import ProductItem from '../components/ProductItem';
+import App from '../../../../App';
+import { Snackbar } from '../../../components/Snackbar';
 
 function HomeScreen() {
-  const {users, loading, error, reload } = useUsers();
+  const {products, loading, reload} = useProducts();
+  const [snackBarMessage, setSnackBarMessage] = useState<string | null>(null);
+  
+  const navigation = useNavigation<HomeScreenNavigationProp>();
+
+  function handlePressProduct(product: Product) {
+    navigation.navigate(RouteName.DetailProduct, {
+      productId: product.id,
+    });
+  }
+
+  async function handlePullToRefresh() {
+    await reload(); // phải chờ gọi API lấy danh sách mới xong
+    setSnackBarMessage('Làm mới thành công!'); // display
+  }
 
   return (
     <SafeAreaView 
         style = {styles.container}
         edges={['left', 'right', 'bottom']}
     >
-        
-        <Text
-        >
-          HomeScreen
-        </Text>
+      {loading ? (
+        <View style = {styles.center}>
+        <ActivityIndicator size="large" color={AppColors.primary}/>
+        <Text style={styles.loadingText}>Đang tải danh sách sản phẩm...</Text>
+      </View>
+      ) : (
+        <FlatList<Product>
+          data = {products}
+          keyExtractor={(item) => String(item.id)} // co ve nhu la key dinh danh
+          renderItem={({item}) => ( // ve tung item tu products
+            <ProductItem 
+              product={item} 
+              onPress={handlePressProduct}/>
+          )}
+          contentContainerStyle={styles.list}
+          refreshing={loading}
+          onRefresh={handlePullToRefresh} // pull to refresh 
+        />
+      )}, 
+
+      <Snackbar
+        message={snackBarMessage}
+        onDismiss={() => setSnackBarMessage(null)}
+      />
     </SafeAreaView>
   );
 }
@@ -26,7 +67,7 @@ function HomeScreen() {
 export default HomeScreen
 
 const styles = StyleSheet.create({
-    container: {
+  container: {
     flex: 1,
     backgroundColor: AppColors.background,
   },
@@ -36,37 +77,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     gap: 12,
   },
+  loadingText: {
+    color: '#64748B',
+  },
   list: {
     padding: 16,
-    flexGrow: 1,
-  },
-  message: {
-    fontSize: 16,
-    color: AppColors.muted,
-    textAlign: 'center',
-  },
-  errorBox: {
-    padding: 16,
-    gap: 12,
-  },
-  errorText: {
-    fontSize: 16,
-    color: AppColors.error,
-  },
-  button: {
-    minHeight: 48,
-    paddingHorizontal: 16,
-    borderRadius: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: AppColors.primary,
-  },
-  buttonText: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: AppColors.onPrimary,
-  },
-  pressed: {
-    opacity: 0.75,
   },
 });

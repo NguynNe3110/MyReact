@@ -1,0 +1,3 @@
+khi mà kết nối tới adb rồi mà metro không hoạt động thì chạy lệnh 
+để kết nối tới máy
+> adb reverse tcp:8081 tcp:8081

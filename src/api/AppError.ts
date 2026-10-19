@@ -25,34 +25,34 @@ export function mapApiError(error: unknown): AppError {
     }
 
     if(axios.isCancel(error)) {
-        return new AppError('cancelled', 'Yeu cau da duoc huy');
+        return new AppError('cancelled', 'Yêu cầu đã được hủy!');
     }
 
     if(axios.isAxiosError(error)) {
         if(error.code === 'ECONNABORTED' || error.code === 'ETIMEDOUT') {
             return new AppError(
                 'timeout',
-                'Yeu cau qua thoi gian cho. Vui long thu lai',
+                'Quá thời gian chờ, vui lòng thử lại!',
             );
         }
 
         if(error.response) {
             const status = error.response.status;
 
-            const message = status === 404 ? 'Khong tim thay du lieu' : 'Khong the tai du lieu. Vui long thu lai';
+            const message = status === 404 ? 'Không tìm thấy dữ liệu' : 'Không thể tải dữ liệu, vui lòng thử lại';
             return new AppError('http', message, status);
         }
 
         if(error.code === 'ERR_NETWORK' || error.request) {
             return new AppError(
                 'network',
-                'Khong the ket noi den server. Kiem tra ket noi mang',
+                'Không thể kết nối tới server. vui lòng xem lại kết nối',
             );
         }
     }
 
     return new AppError(
         'unknown',
-        'Da xay ra loi, vui long thu lai',
+        'Đã xảy ra lỗi, vui lòng thử lại',
     );
 }

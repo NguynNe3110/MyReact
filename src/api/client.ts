@@ -25,7 +25,7 @@ apiClient.interceptors.request.use(async config => {
 
 // ham nay nhan 2 ham 
 apiClient.interceptors.response.use(
-    response => response, 
+    response => response, // trả nguyên vẹn mà axios trả về
     (error: unknown) => {
         return Promise.reject(mapApiError(error));
     },

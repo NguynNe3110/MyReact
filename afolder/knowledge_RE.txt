@@ -61,3 +61,11 @@ apiClient.interceptors.response.use(
 );
 
 // =========================================================================================
+
+khi tạo 1 hàm promise thì ts cho 2 hàm 
+resolve(value), hoàn thành với value
+reject(error),  kết thúc với lỗi error
+
+const promise = new Promise((resolve, reject) => {
+    // Xử lý công việc bất đồng bộ
+});
