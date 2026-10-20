@@ -15,30 +15,29 @@ import { useNavigation } from '@react-navigation/native';
 import AppTextField from '../../../components/AppTextField';
 import { AppColors } from '../../../theme/colors';
 import { RouteName } from '../../../config/navigation';
-import { mapApiError } from '../../../api/AppError';
-import { registerApi } from '../auth/authApi';
+import { useRegister } from './useRegister';
+import { Snackbar } from '../../../components/Snackbar';
 
 export default function RegisterScreen() {
   const navigation = useNavigation<any>();
+  const { loading, error, register } = useRegister();
 
-  const [username, setUsername] = useState('');
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  const [loading, setLoading] = useState(false);
-  const [serverError, setServerError] = useState<string | null>(null);
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
 
   const validate = (): boolean => {
     const errors: Record<string, string> = {};
 
-    if (!name.trim()) errors.name = 'Vui lòng nhập họ và tên';
+    if (!name.trim()) errors.name = 'Vui lòng nhập tên đăng nhập';
     if (!email.trim()) errors.email = 'Vui lòng nhập email';
     else if (!/\S+@\S+\.\S+/.test(email)) errors.email = 'Email không hợp lệ';
 
     if (!password) errors.password = 'Vui lòng nhập mật khẩu';
-    else if (password.length < 6) errors.password = 'Mật khẩu tối thiểu 6 ký tự';
+    else if (password.length < 8) errors.password = 'Mật khẩu tối thiểu 8 ký tự';
 
     if (confirmPassword !== password) {
       errors.confirmPassword = 'Mật khẩu xác nhận không khớp';
@@ -51,19 +50,11 @@ export default function RegisterScreen() {
   const handleRegister = async () => {
     if (!validate()) return;
 
-    setLoading(true);
-    setServerError(null);
-
-    try {
-      await registerApi({ username, email, password, confirmPassword });
+    const result = await register({ name, email, password });
+    if (result) {
       Alert.alert('Thành công', 'Đăng ký tài khoản thành công! Vui lòng đăng nhập.', [
         { text: 'OK', onPress: () => navigation.navigate(RouteName.Login) },
       ]);
-    } catch (cause) {
-      const err = mapApiError(cause);
-      setServerError(err.message);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -82,17 +73,18 @@ export default function RegisterScreen() {
             <Text style={styles.subtitle}>Đăng ký để bắt đầu trải nghiệm</Text>
           </View>
 
-          {serverError && (
+          {error && (
             <View style={styles.serverErrorBox}>
-              <Text style={styles.serverErrorText}>{serverError}</Text>
+              <Text style={styles.serverErrorText}>{error.message}</Text>
             </View>
           )}
 
           <View style={styles.form}>
             <AppTextField
-              label="Họ và tên"
-              placeholder="Nguyễn Văn A"
-              value={username}
+              label="Name"
+              placeholder="Nhập tên"
+              autoCapitalize="none"
+              value={name}
               onChangeText={(t) => {
                 setName(t);
                 if (formErrors.name) setFormErrors((p) => ({ ...p, name: '' }));

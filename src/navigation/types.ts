@@ -9,23 +9,8 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RouteName } from '../config/navigation';
 import type { Profile } from '../modules/user/types';
 import { AuthStackParamList } from './AuthNavigator';
+import { BottomTabParamList } from './BottomTabNavigator';
 
-// type mô tả danh sách màn hình và tham số của nó
-export type BottomTabParamList = {
-  // các route thuộc bottom tabs
-  [RouteName.Home]: undefined; // underfined là k yêu cầu tham số
-  [RouteName.Cart]: undefined; //setting là tên màn hình
-  [RouteName.Setting]: undefined;
-  // khi dùng thì navigation.navigate('Home');
-};
-
-//trường hợp muốn nhận tham số
-// export type BottomTabParamList = {
-//   Home: { userId: number };
-//   Setting: undefined;
-// };
-
-//khi truyền thì navigation.navigate('Home', {userId: 10});
 
 // khai báo toàn app
 export type RootStackParamList = {
@@ -53,9 +38,9 @@ export type RootStackParamList = {
 
   [RouteName.DetailProduct] : {productId: number};
 
-  // [RouteName.Login] : undefined;
-  // [RouteName.Register] : undefined;
-  // [RouteName.ForgotPassword] : undefined;
+  [RouteName.Login]: undefined;
+  [RouteName.Register]: undefined;
+  [RouteName.ForgotPassword]: undefined;
 };
 
 // home có thể chuyển tab và mở màn trong stack cha

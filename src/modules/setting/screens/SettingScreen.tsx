@@ -1,4 +1,4 @@
-import { Keyboard, ScrollView, StatusBar, StyleSheet, View } from 'react-native';
+import { Keyboard, Pressable, ScrollView, StatusBar, StyleSheet, Text, View } from 'react-native';
 import React, { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { AppColors } from '../../../theme/colors';
@@ -9,6 +9,7 @@ import { useNavigation } from '@react-navigation/native';
 import type { SettingScreenNavigationProp } from '../../../navigation/types';
 import type { Profile } from '../../user/types';
 import { RouteName } from '../../../config/navigation';
+import { tokenStorage } from '../../../api/tokenStorage';
 
 const SettingScreen = () => {
   const navigation = useNavigation<SettingScreenNavigationProp>();
@@ -30,6 +31,18 @@ const SettingScreen = () => {
     Keyboard.dismiss();
     navigation.navigate(RouteName.UserScreen);
   }
+
+  async function onPressedButtonLogout() {
+    Keyboard.dismiss();
+
+    await tokenStorage.clearTokens();
+    console.log(`[DEBUG] xoa token khoi keystore`);
+
+    navigation.getParent()?.reset({
+      index : 0, 
+      routes: [{name: RouteName.Auth}],
+    });
+  } 
 
   return (
     <SafeAreaView style={styles.container} edges={['top','left', 'right', 'bottom']}>
@@ -86,7 +99,25 @@ const SettingScreen = () => {
             onPress={onGetUserJsonHolder}
           />
 
+          
+          
+          
         </View>
+        <Pressable
+              style={({ pressed }) => [
+                styles.button,
+                pressed && styles.pressed,
+                // loading && styles.buttonDisabled,
+              ]}
+              onPress={onPressedButtonLogout}
+              // disabled={loading}
+            >
+              {/* {loading ? (
+                <ActivityIndicator color={AppColors.onPrimary} />
+              ) : ( */}
+                <Text style={styles.buttonText}>Đăng Xuất</Text>
+              {/* )} */}
+          </Pressable>
       </ScrollView>
     </SafeAreaView>
   );
@@ -110,4 +141,20 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     gap: 12,
   },
+
+  buttonLogout: {
+    backgroundColor: AppColors.error,
+  },
+
+  button: {
+    minHeight: 50,
+    backgroundColor: AppColors.error,
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 16,
+  },
+  buttonDisabled: { opacity: 0.6 },
+  pressed: { opacity: 0.8 },
+  buttonText: { color: AppColors.surface, fontSize: 16, fontWeight: '600' },
 });

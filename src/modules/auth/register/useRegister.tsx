@@ -26,3 +26,9 @@ export function useRegister() {
 
     return { loading, error, register };
 }
+
+// {
+//   "name": "string",
+//   "email": "user@example.com",
+//   "password": "Password123!"
+// }

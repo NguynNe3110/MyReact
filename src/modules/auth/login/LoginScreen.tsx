@@ -13,20 +13,20 @@ const LoginScreen = () => {
 
     const {loading, error, login} = useLogin();
 
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const [formError, setFormError] = useState<
     {
-        username ?: string;
+        email ?: string;
         password ?: string;
     }> ({});
 
     const validate = (): boolean => {
-        const errors: {username ?: string; password ?: string } = {};
+        const errors: {email ?: string; password ?: string } = {};
 
-        if(!username.trim()) {
-            errors.username = 'Thông tin không được để trống!';
+        if(!email.trim()) {
+            errors.email = 'Thông tin không được để trống!';
         } else if(!password.trim()) {
             errors.password = 'Thông tin không được để trống!';
         } else if (password.length < 4) {
@@ -40,10 +40,13 @@ const LoginScreen = () => {
     }
 
     const  handleLogin = async () => {
+      console.log("[DEBUG] Vừa nhấn nút")
         if(!validate()) return;
 
-        const result = await login({username, password});
-
+        const result = await login({email, password});
+        
+        console.log(`[DEBUG] email: ${email}, password: ${password}`)
+        console.log(`[DEBUG] dta receipt then onPress login: ${result}`)
         if(result) {
             Alert.alert('Thành công', 'Đăng nhập thành công!');
             navigation.navigate(RouteName.BottomBarStack);
@@ -72,14 +75,14 @@ const LoginScreen = () => {
 
                         <View style = {styles.form}>
                             <AppTextField
-                                label='Username'
-                                placeholder='username'
-                                value={username}
+                                label='Email'
+                                placeholder='email'
+                                value={email}
                                 onChangeText={(text) => {
-                                    setUsername(text);
-                                    if(formError.username) setFormError((prev) => ({...prev, username: undefined}));
+                                    setEmail(text);
+                                    if(formError.email) setFormError((prev) => ({...prev, email: undefined}));
                                 }}
-                                error = {formError.username}
+                                error = {formError.email}
                             />
 
                             <AppTextField
