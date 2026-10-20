@@ -1,4 +1,4 @@
-import { CartItem, Product } from "../../home/types";
+import { CartItem, ProductMock } from "../../home/types";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const CART_KEY = '@my_shopping_cart';
@@ -14,7 +14,7 @@ export const cartStorage = {
         }
     },
 
-    async addToCart(product: Product) : Promise<void> {
+    async addToCart(product: ProductMock) : Promise<void> {
         try{
             const cart = await this.getCart();
             const existingIndex = cart.findIndex((item) => item.product.id === product.id);

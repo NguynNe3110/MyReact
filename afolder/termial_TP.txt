@@ -1,3 +1,9 @@
 khi mà kết nối tới adb rồi mà metro không hoạt động thì chạy lệnh 
 để kết nối tới máy
 > adb reverse tcp:8081 tcp:8081
+
+chạy lệnh sau để lap không nuốt âm thanh của điện thoại
+> scrcpy --audio-
+
+chạy lệnh sau để cửa sổ luôn hiển thị trên cùng
+> scrcpy --always-on-top

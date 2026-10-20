@@ -1,14 +1,14 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
-import { Product } from "../types";
+import { ProductMock } from "../types";
 import { AppColors } from "../../../theme/colors";
 
 
-type ProductItemProps = {
-    product: Product;
-    onPress: (product: Product) => void
+type ProductItemMockProps = {
+    product: ProductMock;
+    onPress: (product: ProductMock) => void
 }
 
-export default function ProductItem({product, onPress} : ProductItemProps) {
+export default function ProductItemMock({product, onPress} : ProductItemMockProps) {
     return (
         <Pressable
             style= {({pressed}) => [styles.card, pressed && styles.pressed]}

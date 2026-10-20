@@ -1,8 +1,10 @@
 export enum RouteName {
   BottomBarStack = 'BottomBarStack',
   Home = 'Home',
-  Cart = 'Cart',
+  Fetch = 'Fetch',
   Setting = 'Setting',
+  
+  Cart = 'Cart',
   DetailUser = 'DetailUser',
   InfoSelf = 'InfoSelf',
   UserScreen = 'UserScreen',

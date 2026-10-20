@@ -1,4 +1,4 @@
-export type Product = {
+export type ProductMock = {
     id: number;
     name: string;
     price: number;
@@ -6,6 +6,6 @@ export type Product = {
 }
 
 export type CartItem = {
-    product: Product;
+    product: ProductMock;
     quantity: number;
 }

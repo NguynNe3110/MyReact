@@ -99,6 +99,27 @@ const SettingScreen = () => {
             onPress={onGetUserJsonHolder}
           />
 
+          {/* <ItemList
+            title="Get api user jsonPlaceHolder"
+            desctiption="Lấy danh sách người dùng"
+            leading={
+              <IcUser
+                width={24}
+                height={24}
+                color={AppColors.text}
+                accessible={false}
+              />
+            }
+            trailing={
+              <IcChevronRight
+                width={20}
+                height={20}
+                color={AppColors.muted}
+                accessible={false}
+              />
+            }
+            onPress={onGetUserJsonHolder}
+          /> */}
           
           
           

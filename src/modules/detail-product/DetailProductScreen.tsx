@@ -3,8 +3,8 @@ import React, { useEffect, useState } from 'react'
 import { AppColors } from '../../theme/colors'
 import { Route, useNavigation, useRoute } from '@react-navigation/native'
 import { DetailProductScreenNavigationProp, DetailProductScreenProp } from '../../navigation/types'
-import { Product } from '../home/types'
-import { getProductById } from '../home/api/productApi'
+import { ProductMock } from '../home/types'
+import { getProductByIdMock } from '../home/api/productMockApi'
 import { cartStorage } from '../cart/storage/cartStorage'
 
 const DetailProductScreen = () => {
@@ -13,13 +13,13 @@ const DetailProductScreen = () => {
 
   const {productId} = route.params; // chi nhan khong can phai khai baso
 
-  const[product, setProduct] = useState<Product | null>(null);
+  const[product, setProduct] = useState<ProductMock | null>(null);
   const[loading, setLoading] = useState<boolean>(true);
   
   useEffect(() => {
     async function fetchDetail() {
       setLoading(true);
-      const data = await getProductById(productId);
+      const data = await getProductByIdMock(productId);
 
       setProduct(data ?? null);
       setLoading(false);

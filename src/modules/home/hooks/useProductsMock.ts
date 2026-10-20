@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
-import { Product } from "../types";
-import { getProducts } from "../api/productApi";
+import { ProductMock } from "../types";
+import { getProductsMock } from "../api/productMockApi";
 
 
-export function useProducts() {
-    const [products, setProducts] = useState<Product[]>([]);
+export function useProductsMock() {
+    const [products, setProducts] = useState<ProductMock[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
 
     async function loadData() {
         setLoading(true);
         try {
 
-            const data = await getProducts(); // promise pahri dduocwj await
+            const data = await getProductsMock(); // promise pahri dduocwj await
             setProducts(data);
 
             setLoading(false);

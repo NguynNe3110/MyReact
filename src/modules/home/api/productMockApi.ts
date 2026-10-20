@@ -1,13 +1,13 @@
-import { Product } from "../types";
+import { ProductMock } from "../types";
 
 
-export async function getProducts(): Promise<Product[]> { // promise có 3 trạng thái, pending, fullilled, rejected 
+export async function getProductsMock(): Promise<ProductMock[]> { // promise có 3 trạng thái, pending, fullilled, rejected 
     return new Promise((resolve) => { // resolve là hàm thông báo kết quả cho promise 
         setTimeout(() => resolve(MOCK_PRODUCTS), 500);
     })
 }
 
-export async function getProductById(id: number): Promise<Product | undefined> {
+export async function getProductByIdMock(id: number): Promise<ProductMock | undefined> {
     return new Promise((resolve, _) => { // promise trả về 2 hàm resolve khi thành công và reject khi error
         setTimeout(() => {
             const found = MOCK_PRODUCTS.find((p) => p.id===id);
@@ -18,7 +18,7 @@ export async function getProductById(id: number): Promise<Product | undefined> {
 }
 
 
-const MOCK_PRODUCTS: Product[] = [
+const MOCK_PRODUCTS: ProductMock[] = [
     {
         id: 1, 
         name: 'Iphone 15 ProMax',
