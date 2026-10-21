@@ -12,9 +12,9 @@ import SettingScreen from '../modules/setting/screens/SettingScreen';
 
 import { AppColors } from '../theme/colors';
 import { RouteName } from '../config/navigation';
-import { IcCart, IcHome, IcSetting } from '../assets/icons';
 import { HeaderCartButton } from '../modules/cart/components/HeaderCartButton';
 import { BottomTabParamList } from './BottomTabNavigator';
+import { IcPlaceHolder } from '../assets/icons';
 
 const Tab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -134,7 +134,7 @@ export default function BottomTabNavigationCustomer() {
           title: 'Trang chủ',
           tabBarLabel: 'Trang chủ',
           tabBarIcon: ({ color, size }) => (
-            <IcHome width={size} height={size} color={color} />
+            <IcPlaceHolder width={size} height={size} color={color} />
           ),
           headerStyle: {
             backgroundColor: '#ffffff',
@@ -152,7 +152,7 @@ export default function BottomTabNavigationCustomer() {
           title: 'Giỏ hàng',
           tabBarLabel: 'Giỏ hàng',
           tabBarIcon: ({ color, size }) => (
-            <IcCart width={size} height={size} color={color} />
+            <IcPlaceHolder width={size} height={size} color={color} />
           ),
         }}
       />
@@ -164,7 +164,7 @@ export default function BottomTabNavigationCustomer() {
           title: 'Cài đặt',
           tabBarLabel: 'Cài đặt',
           tabBarIcon: ({ color, size }) => (
-            <IcSetting width={size} height={size} color={color} />
+            <IcPlaceHolder width={size} height={size} color={color} />
           ),
         }}
       />

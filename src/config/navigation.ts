@@ -1,14 +1,15 @@
 export enum RouteName {
   BottomBarStack = 'BottomBarStack',
   Home = 'Home',
-  Fetch = 'Fetch',
+  Product = 'Product',
+  DetailProduct = 'DetailProduct',
   Setting = 'Setting',
   
   Cart = 'Cart',
   DetailUser = 'DetailUser',
   InfoSelf = 'InfoSelf',
   UserScreen = 'UserScreen',
-  DetailProduct = 'DetailProduct',
+  DetailProductMock = 'DetailProductMock',
 
   // auth
   Login = 'Login',

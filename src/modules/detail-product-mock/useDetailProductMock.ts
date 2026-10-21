@@ -1,12 +1,12 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-type useProductProps = {
-    productId: number
-}
+type UseProductProps = {
+    productId: number;
+};
 
-export default function useProductProps({id} : useProductProps) {
-    async function getProductById(id) {
+export default function useDetailProductMock({ productId }: UseProductProps) {
+    async function getProductById(id: number) {
         
     }
 }

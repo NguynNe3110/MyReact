@@ -21,7 +21,7 @@ function HomeScreen() {
   const navigation = useNavigation<HomeScreenNavigationProp>();
 
   function handlePressProduct(product: ProductMock) {
-    navigation.navigate(RouteName.DetailProduct, {
+    navigation.navigate(RouteName.DetailProductMock, {
       productId: product.id,
     });
   }

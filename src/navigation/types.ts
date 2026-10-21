@@ -36,11 +36,16 @@ export type RootStackParamList = {
 
   [RouteName.UserScreen] : undefined;
 
-  [RouteName.DetailProduct] : {productId: number};
+  [RouteName.DetailProductMock] : {productId: number};
 
   [RouteName.Login]: undefined;
   [RouteName.Register]: undefined;
   [RouteName.ForgotPassword]: undefined;
+  [RouteName.Cart] : undefined;
+
+  [RouteName.Product] : undefined;
+  [RouteName.DetailProduct] : {productId: string};
+
 };
 
 // home có thể chuyển tab và mở màn trong stack cha
@@ -50,9 +55,8 @@ export type HomeScreenNavigationProp = CompositeNavigationProp<
   NativeStackNavigationProp<RootStackParamList> // prop dùng để khai báo cho các màn hình khác trong rootStack biết
 >;
 
-// prac cũng có thể chuyển tab và mở detail vì cùng cấp trong rootStackParamList
-export type CartScreenNavigationProp = CompositeNavigationProp<
-  BottomTabNavigationProp<BottomTabParamList, RouteName.Cart>,
+export type ProductScreenNavigationProp = CompositeNavigationProp<
+  BottomTabNavigationProp<BottomTabParamList, RouteName.Product>,
   NativeStackNavigationProp<RootStackParamList>
 >;
 
@@ -65,6 +69,11 @@ export type SettingScreenNavigationProp = CompositeNavigationProp<
 export type DetailUserScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
   RouteName.DetailUser
+>;
+
+export type CartScreenNavigationProp = NativeStackNavigationProp<
+  RootStackParamList, 
+  RouteName.Cart
 >;
 
 // dùng để định kiểu cho đối tượng route của Detail. (định nghĩa các tham số truyền vào)
@@ -84,6 +93,17 @@ export type UserScreenNavigationProp = NativeStackNavigationProp<
   RouteName.UserScreen
 >;
 
+export type DetailProductMockScreenNavigationProp = NativeStackNavigationProp<
+  RootStackParamList, 
+  RouteName.DetailProductMock
+>;
+
+export type DetailProductMockScreenProp = RouteProp<
+  RootStackParamList,
+  RouteName.DetailProductMock
+>;
+
+// Type alias backward compatibility
 export type DetailProductScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList, 
   RouteName.DetailProduct

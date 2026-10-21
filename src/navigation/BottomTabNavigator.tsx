@@ -9,6 +9,7 @@ import CartScreen from '../modules/cart/screens/CartScreen';
 import { Pressable, Text } from 'react-native';
 import { IcCart, IcPlaceHolder } from '../assets/icons';
 import { HeaderCartButton } from '../modules/cart/components/HeaderCartButton';
+import PracticeScreen from '../modules/product/screen/ProductScreen';
 
 //hàm create sẽ trả về đói tượng gồm Navigator, Screen, Group
 const Tab = createBottomTabNavigator<BottomTabParamList>();
@@ -18,6 +19,7 @@ export type BottomTabParamList = {
   // các route thuộc bottom tabs
   [RouteName.Home]: undefined; // underfined là k yêu cầu tham số
   [RouteName.Cart]: undefined; //setting là tên màn hình
+  [RouteName.Product] : undefined;
   [RouteName.Setting]: undefined;
   // [RouteName.Fetch]: undefined;
 
@@ -89,7 +91,7 @@ export default function BottomTabNavigator() { // bản chât là component
         }}
       />
 
-      <Tab.Screen //có thể ghi đè một số cấu hình này cho từng Tab.Screen bằng options.
+      {/* <Tab.Screen //có thể ghi đè một số cấu hình này cho từng Tab.Screen bằng options.
         name={RouteName.Cart} // tên route dùng trong navigate()
         component={CartScreen}
         options={{
@@ -99,8 +101,20 @@ export default function BottomTabNavigator() { // bản chât là component
             <IcPlaceHolder width={size} height={size} color={color}/>
           ),
         }}
-      />
+      /> */}
 
+      <Tab.Screen
+        name={RouteName.Product} // tên phải giống tên đã khai báo trong BottomTabParamList
+        component={PracticeScreen} 
+        options={{
+          title:'Sản phẩm',
+          tabBarLabel: 'Sản phẩm',
+          tabBarIcon: ({color, size}) => (
+            <IcPlaceHolder width={size} height={size} color={color}/>
+          ),
+        }}
+      />
+      
       <Tab.Screen
         name={RouteName.Setting} // tên phải giống tên đã khai báo trong BottomTabParamList
         component={SettingScreen} 
@@ -112,6 +126,8 @@ export default function BottomTabNavigator() { // bản chât là component
           ),
         }}
       />
+
+
     </Tab.Navigator>
   );
 }

@@ -7,7 +7,6 @@ import BottomTabNavigator from './BottomTabNavigator';
 import DetailScreen, { DetailUserScreen } from '../modules/detail-user/DetailUserScreen';
 import { RouteName } from '../config/navigation';
 import InfoSelfScreen from '../modules/infoself/screens/InfoSelfScreen';
-import DetailProductScreen from '../modules/detail-product/DetailProductScreen';
 import UserScreen from '../modules/user/screen/UserScreen';
 import LoginScreen from '../modules/auth/login/LoginScreen';
 import RegisterScreen from '../modules/auth/register/RegisterScreen';
@@ -15,6 +14,10 @@ import AuthNavigator from './AuthNavigator';
 import { tokenStorage } from '../api/tokenStorage';
 import { ActivityIndicator, View } from 'react-native';
 import { AppColors } from '../theme/colors';
+import BottomTabNavigationCustomer from './BottomTabNavigationCustomer';
+import CartScreen from '../modules/cart/screens/CartScreen';
+import PracticeScreen from '../modules/product/screen/ProductScreen';
+import DetailProductMockScreen, { DetailProductScreen } from '../modules/detail-product-mock/DetailProductMockScreen';
 // tạo navigator quản lý các màn hình theo ngăn xếp, sử dụng cơ chế native stack
 // <RootStackParamList> là Generic Type để TypeScript biết các route hợp lệ và kiểu params của chúng.
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -58,6 +61,7 @@ export default function AppNavigator() {
         initialRouteName={initialRoute}>
         <Stack.Screen // đăng kí 1 route với stack navigator
           name={RouteName.BottomBarStack}
+          // component={BottomTabNavigator}
           component={BottomTabNavigator}
           options={{
             headerShown: false // phải ẩn đi,tránh hiển thị đè
@@ -91,9 +95,25 @@ export default function AppNavigator() {
           // màn hình chi tiết sản phẩm, navigate home -> 
         }
         <Stack.Screen 
+          name={RouteName.DetailProductMock}
+          component={DetailProductMockScreen}
+          // thu bo qua option
+        />
+
+        <Stack.Screen
+          name={RouteName.Product}
+          component={PracticeScreen}
+          options={{
+            title: 'Sản phẩm'
+          }}
+        />
+
+        <Stack.Screen
           name={RouteName.DetailProduct}
           component={DetailProductScreen}
-          // thu bo qua option
+          options={{
+            title: 'Chi tiết sản phẩm'
+          }}
         />
 
         {/* <Stack.Screen
@@ -106,6 +126,12 @@ export default function AppNavigator() {
           component={RegisterScreen}
         /> */}
 
+        <Stack.Screen
+          name={RouteName.Cart}
+          component={CartScreen}
+          options={{headerShown: true}}
+        />
+        
         <Stack.Screen
           name={RouteName.Auth}
           component={AuthNavigator}

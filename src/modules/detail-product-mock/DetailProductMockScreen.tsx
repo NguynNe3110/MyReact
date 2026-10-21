@@ -2,14 +2,14 @@ import { Alert, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { AppColors } from '../../theme/colors'
 import { Route, useNavigation, useRoute } from '@react-navigation/native'
-import { DetailProductScreenNavigationProp, DetailProductScreenProp } from '../../navigation/types'
+import { DetailProductMockScreenNavigationProp, DetailProductMockScreenProp } from '../../navigation/types'
 import { ProductMock } from '../home/types'
 import { getProductByIdMock } from '../home/api/productMockApi'
 import { cartStorage } from '../cart/storage/cartStorage'
 
-const DetailProductScreen = () => {
-  const route = useRoute<DetailProductScreenProp>(); // phari duoc khoi tao
-  const navigation = useNavigation<DetailProductScreenNavigationProp>();
+const DetailProductMockScreen = () => {
+  const route = useRoute<DetailProductMockScreenProp>(); // phari duoc khoi tao
+  const navigation = useNavigation<DetailProductMockScreenNavigationProp>();
 
   const {productId} = route.params; // chi nhan khong can phai khai baso
 
@@ -60,7 +60,8 @@ const DetailProductScreen = () => {
   );
 }
 
-export default DetailProductScreen
+export default DetailProductMockScreen;
+export { DetailProductMockScreen as DetailProductScreen };
 
 const styles = StyleSheet.create({
     container: {
