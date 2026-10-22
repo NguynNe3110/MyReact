@@ -1,24 +1,4 @@
-// =========================== state - management ==================================================
-    
-// =========================================================================================
-lưu ý chỉ setState  khi màn hình đang mở (ở trạng thái isMounted) nếu k sẽ bị lỗi
 
-useEffect sinh ra để xử lý vòng đời của component (mounting, updating, unmounting)
-
-sync-tax
-
-useEffect(() => {
-    // Setup effect
-
-    return () => {
-        // Cleanup effect
-    };
-}, [dependency]);
-
-có 3 cách sử dụng dependency 
-useEffect(fn)   -> sau mỗi lần render được commit
-useEffect(fn, []) -> lúc mount và clean lúc unmount
-useEffect(fn, [value]) -> lúc mount và khi value thay đổi
 
 =-=-=-=-=
 với những cú pháp mà dạng generic<T> thì đều có thể dùng | ví dụ generic<T | something | null>

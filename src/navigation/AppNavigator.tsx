@@ -17,7 +17,8 @@ import { AppColors } from '../theme/colors';
 import BottomTabNavigationCustomer from './BottomTabNavigationCustomer';
 import CartScreen from '../modules/cart/screens/CartScreen';
 import PracticeScreen from '../modules/product/screen/ProductScreen';
-import DetailProductMockScreen, { DetailProductScreen } from '../modules/detail-product-mock/DetailProductMockScreen';
+import DetailProductMockScreen from '../modules/detail-product-mock/DetailProductMockScreen';
+import DetailProductScreen from '../modules/detail-product/screen/DetailProductScreen';
 // tạo navigator quản lý các màn hình theo ngăn xếp, sử dụng cơ chế native stack
 // <RootStackParamList> là Generic Type để TypeScript biết các route hợp lệ và kiểu params của chúng.
 const Stack = createNativeStackNavigator<RootStackParamList>();

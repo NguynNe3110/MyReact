@@ -1,10 +1,10 @@
 import { Product } from '../../product/types';
 
-DEFAULT_PRODUCT: Product = {
+export const DEFAULT_PRODUCT: Product = {
   id: 'prd_001',
-  name: 'Tai nghe chụp tai Bluetooth Wireless SoundPro Bass Extra',
+  name: 'Tai nghe Bluetooth Wireless SoundPro Bass Extra',
   description:
-    'Tai nghe chụp tai Bluetooth mang đến âm thanh sống động với âm trầm mạnh mẽ, công nghệ chống ồn chủ động (ANC) vượt trội và thời lượng pin ấn tượng lên đến 30 giờ. Đệm tai công thái học êm ái, thoáng khí cho cảm giác dễ chịu suốt ngày dài.',
+    'Tai nghe chụp tai Bluetooth mang đến âm thanh sống động với âm trầm mạnh mẽ, công nghệ chống ồn chủ động (ANC) vượt trội và thời lượng pin ấn tượng lên đến 30 giờ.',
   price: {
     amount: 1250000,
     currency: 'VND',
@@ -22,15 +22,11 @@ DEFAULT_PRODUCT: Product = {
     thumbnail: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&q=80',
     images: [
       'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&q=80',
-      'https://images.unsplash.com/photo-1484704849700-f032a568e944?w=800&q=80',
-      'https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=800&q=80',
     ],
   },
   attributes: {
     brand: 'SoundMaster',
     warranty: '12 tháng chính hãng',
-    connection: 'Bluetooth 5.3',
-    origin: 'Việt Nam',
   },
   variants: [
     {
@@ -47,19 +43,12 @@ DEFAULT_PRODUCT: Product = {
         size: 'M',
       },
     },
-    {
-      sku: 'SM-BLUE-L',
-      options: {
-        color: 'Xanh Navy',
-        size: 'L',
-      },
-    },
   ],
   rating: {
     average: 4.8,
     count: 128,
   },
-  tags: ['bluetooth', 'tainghe', 'amthanh', 'bestseller'],
+  tags: ['bluetooth', 'tainghe', 'amthanh'],
   createdAt: '2026-10-20T07:34:11.211Z',
   updatedAt: '2026-10-21T07:34:11.211Z',
 };
